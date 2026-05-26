@@ -600,10 +600,15 @@ main {
 .sidebar-item:hover { transform: translateX(4px); }
 
 /* gacha */
+#gachaMain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 #gachaContainer {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 800px;
 }
 #info, #pullBtns {
     display: flex;
