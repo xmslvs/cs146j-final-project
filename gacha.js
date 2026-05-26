@@ -1,5 +1,5 @@
-currency = localStorage.getItem(currency);
-userKey = localStorage.getItem(userKey);
+// currency = localStorage.getItem(currency);
+// userKey = localStorage.getItem(userKey);
 async function pullGacha(numPulls) {
     response = await fetch(TARGET_URL, {
         method: "POST",
