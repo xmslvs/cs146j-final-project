@@ -1,5 +1,5 @@
 const { Player } = TextAliveApp;
-key = "MMp6OLkimxy48EGl";
+key = "MMp6OLkimxy48EGl"; // issa's API key for TextAlive API
 
 // show current word in "#text" container
 const animateWord = function (now, unit) {
@@ -18,7 +18,6 @@ player.addListener({
       player.createFromSongUrl("https://www.youtube.com/watch?v=YBEW95N2Lu4");
     }
     if (!app.managed) {
-      // 再生コントロールを表示
       //showControls();
     }
   },

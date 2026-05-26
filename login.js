@@ -40,3 +40,5 @@ async function register(username, password) {
         alert("Registration resulted in error. Please contact the developer.");
     }
 }
+
+//TODO: event listeners, preventdefaults etc. 
