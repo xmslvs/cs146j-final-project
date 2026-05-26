@@ -64,95 +64,91 @@ songs = [
     },
 ]
 
-let current_song = null; /**universal list*/
+const currentPlayer = "mikufan1";
 
-function renderGlobalLeaderboard() {
-    const tbody = document.getElementById("lbBody");
-    const userBest = {};
+function renderPlayerScores() {
+    const container = document.getElementById("player-scores");
 
-    songs.forEach(song => {
-        song.highscores.forEach(entry => {
-            if (!userBest[entry.userName] || entry.score > userBest[entry.userName].score) {
-                userBest[entry.userName] = { ...entry, song: song.title };
-            }
-        });
-    });
+    const playerSongs = songs.map(song => {
+        const playerEntry = song.highscores.find(e => e.userName === currentPlayer);
+        return { song, score: playerEntry ? playerEntry.score : null };
+    })
+    .filter(row => row.score !== null)
+    .sort((a, b) => b.score - a.score); // 👈 按分数从高到低
 
-    const rows = Object.values(userBest).sort((a, b) => b.score - a.score);
-
-    tbody.innerHTML = rows.map((row, i) => `
-        <tr>
-            <td>${i + 1}</td>
-            <td>${row.userName}</td>
-            <td><span class="song-tag">${row.song}</span></td>
-            <td class="score">${row.score.toLocaleString()}</td>
-        </tr>
+    container.innerHTML = playerSongs.map(({ song, score }) => `
+        <div class="player-score-card">
+            ${song.coverArt ? `<img src="${song.coverArt}" alt="${song.title}" />` : ''}
+            <div class="player-score-info">
+                <h3>${song.title}</h3>
+                <p>By: ${song.author}</p>
+            </div>
+            <div class="player-score-num">
+                ${score.toLocaleString()}
+            </div>
+        </div>
     `).join("");
 }
-document.addEventListener("DOMContentLoaded", () => {
-    const songlist = document.querySelector("#leaderboardContainer");
+function openModal(index) {
+    currentModalIndex = index;
+    renderModal();
+    document.getElementById("songModal").style.display = "flex";
+}
 
-    for (let i = 0; i < songs.length; i++) {
-        const song = songs[i];
-        
-        const newSong = document.createElement("div");
-        newSong.classList.add("song-card");
+function closeModal() {
+    document.getElementById("songModal").style.display = "none";
+}
 
-        const highscoresHTML = song.highscores && song.highscores.length > 0
-            ? song.highscores.map(entry => `<li>${entry.userName}: ${entry.score.toLocaleString()}</li>`).join("")
-            : "<li>No highscores yet!</li>";
+function renderModal() {
+    const song = songs[currentModalIndex];
 
-        newSong.innerHTML = `
-            <div class="song-info-layout">
-                ${song.coverArt ? `<img src="${song.coverArt}" alt="${song.title} cover" class="song-cover" />` : ''}
-                <div class="song-details">
-                    <h2 class="song-title">${song.title}</h2>
-                    <p class="song-composer">By: ${song.author}</p>
-                </div>
-                <div class="song-leaderboard">
-                    <h3>Global Highscores</h3>
-                    <ol>
-                        ${highscoresHTML}
-                    </ol>
-                </div>
-            </div>
-        `;
+    const sortedScores = [...song.highscores].sort((a, b) => b.score - a.score);
 
-        songlist.appendChild(newSong);
-    }
-});
+    
+    const highscoresHTML = sortedScores.length > 0
+        ? sortedScores.map((entry, i) => `
+            <li>
+                <span class="modal-rank">${i + 1}</span>
+                <span class="modal-username">${entry.userName}</span>
+                <span class="modal-score">${entry.score.toLocaleString()}</span>
+            </li>
+          `).join("")
+        : "<li>No highscores yet!</li>";
+
+    document.getElementById("modal-title").textContent = song.title + " - Highscores";
+    document.getElementById("modal-songname").textContent = song.title;
+    document.getElementById("modal-author").textContent = "By: " + song.author;
+    document.getElementById("modal-cover").src = song.coverArt || "";
+    document.getElementById("modal-scores").innerHTML = highscoresHTML;
+}
 
 let currentCarouselIndex = 0;
+const currentUser = "mikufan1";
 
 function renderCarousel() {
     const song = songs[currentCarouselIndex];
     document.getElementById("song-image").src = song.coverArt || "";
     document.getElementById("song-card-title").textContent = song.title;
     document.getElementById("song-card-author").textContent = "By: " + song.author;
+    const userEntry = song.highscores.find(e => e.userName === currentUser);
+    document.getElementById("song-card-score").textContent = userEntry
+        ? "Your best: " + userEntry.score.toLocaleString()
+        : "No score yet!";
 }
-
 function scrollCarousel(dir) {
     currentCarouselIndex = (currentCarouselIndex + dir + songs.length) % songs.length;
     renderCarousel();
 }
 
-// DOMContentLoaded 里：
-document.addEventListener("DOMContentLoaded", () => {
-    renderGlobalLeaderboard();
-    renderCarousel();
-    showView("global");
-});
-
 function showView(view) {
-    document.getElementById("universal-lb-view").style.display = view === "global" ? "" : "none";
+    document.getElementById("player-lb-view").style.display = view === "player" ? "" : "none";
     document.getElementById("songView").style.display = view === "song" ? "" : "none";
-
-    document.getElementById("btn-global").classList.toggle("active", view === "global");
+    document.getElementById("btn-player").classList.toggle("active", view === "player");
     document.getElementById("btn-song").classList.toggle("active", view === "song");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    renderGlobalLeaderboard();
-    renderCarousel();       
-    showView("global");
+    renderPlayerScores();
+    renderCarousel();
+    showView("player");
 });

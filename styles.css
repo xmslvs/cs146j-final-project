@@ -311,6 +311,54 @@ main {
 .select-btn:hover {
     background: #6b95f0;
 }
+#player-scores {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.player-score-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 20px;
+    background: white;
+    border: 1px solid #84abff;
+    border-radius: 12px;
+}
+
+.player-score-card img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.player-score-info {
+    flex: 1;
+}
+
+.player-score-info h3 {
+    margin: 0 0 4px;
+    color: #1a5276;
+    font-size: 15px;
+}
+
+.player-score-info p {
+    margin: 0;
+    font-size: 12px;
+    color: gray;
+}
+
+.player-score-num {
+    font-size: 18px;
+    font-weight: 500;
+    color: #84abff;
+    white-space: nowrap;
+}
 
 /* modal*/
 #songModal {
