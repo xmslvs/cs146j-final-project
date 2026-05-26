@@ -1,7 +1,7 @@
 const { use } = require("react")
 
 userKey = localStorage.getItem(userKey)
-async function getStats(userKey) {
+async function getUserStats(userKey) {
     if (userKey != null) {
         response = await fetch(TARGET_URL, {
             method: "POST",
@@ -9,6 +9,14 @@ async function getStats(userKey) {
                 "userKey": userKey
             }});
         data = await response.json();
-        
+        // TODO: write backend so that if user gets stats, it responds with a list of stats so we can then put that as .textContent into divs;
         }
     }
+async function getGlobalStats() {
+    response = await fetch(TARGET_URL);
+    data = await response.json();
+    for (let i = 0; i < data.songs.length; i++) {
+        song = data.songs[i];
+        //TODO; add song stat data to DOM (i.e. Song title, composer, song cover art (if possible), top 3 global highscores)
+    }
+}
