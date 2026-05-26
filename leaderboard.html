@@ -33,7 +33,58 @@
     <main>
       <section id="leaderboardContainer">
         <h1 id="leaderbaord-header">Leaderboard</h1>
+        <div class="filter">
+          <button class="song-btn" id="btn-song" onclick="showView('song')">Song</button>
+          <button class="song-btn active" id="btn-global" onclick="showView('global')">Universal</button>
+        </div>
+        <div id = "universal-lb-view">
+           <table class="lb-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Player</th>
+                    <th>Song</th>
+                    <th>Highest Score</th>
+                </tr>
+            </thead>
+            <tbody id="lbBody"></tbody>
+          </table>
+        </div>
+        <div id="songView" style="display:none">
+          <section id="songCarousel" class="">
+          <button id="prevSongBtn" class="arrow" onclick="scrollCarousel(-1)">&#9664;</button>
+          <div id="song-card">
+            <img id="song-image" src="" alt="song image" />
+            <h2 id="song-card-title">Song Title</h2>
+            <p id="song-card-author"></p>
+          </div>
+          <button id="nextSongBtn" class="arrow" onclick="scrollCarousel(1)">&#9654;</button>
+        </section>
+        <div class="select-wrap">
+          <button class="select-btn" onclick="openModal(currentCarouselIndex)">Select</button>
+        </div>
       </section>
+      <div id="songModal" style="display:none">
+    <div class="modal-overlay" onclick="closeModal()"></div>
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <div class="modal-content">
+            <div class="modal-left">
+                <h3 id="modal-title"></h3>
+                <ol id="modal-scores"></ol>
+            </div>
+            <div class="modal-right">
+                <img id="modal-cover" src="" alt="" class="modal-cover-img" />
+                <p id="modal-songname"></p>
+                <p id="modal-author"></p>
+            </div>
+        </div>
+        <div class="modal-nav">
+            <button onclick="navigateModal(-1)">&#8249;</button>
+            <button onclick="navigateModal(1)">&#8250;</button>
+        </div>
+    </div>
+</div>
     </main>
   </body>
 </html>

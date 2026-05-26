@@ -63,6 +63,32 @@ songs = [
         ]
     },
 ]
+
+let current_song = null; /**universal list*/
+
+function renderGlobalLeaderboard() {
+    const tbody = document.getElementById("lbBody");
+    const userBest = {};
+
+    songs.forEach(song => {
+        song.highscores.forEach(entry => {
+            if (!userBest[entry.userName] || entry.score > userBest[entry.userName].score) {
+                userBest[entry.userName] = { ...entry, song: song.title };
+            }
+        });
+    });
+
+    const rows = Object.values(userBest).sort((a, b) => b.score - a.score);
+
+    tbody.innerHTML = rows.map((row, i) => `
+        <tr>
+            <td>${i + 1}</td>
+            <td>${row.userName}</td>
+            <td><span class="song-tag">${row.song}</span></td>
+            <td class="score">${row.score.toLocaleString()}</td>
+        </tr>
+    `).join("");
+}
 document.addEventListener("DOMContentLoaded", () => {
     const songlist = document.querySelector("#leaderboardContainer");
 
@@ -94,4 +120,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
         songlist.appendChild(newSong);
     }
+});
+
+let currentCarouselIndex = 0;
+
+function renderCarousel() {
+    const song = songs[currentCarouselIndex];
+    document.getElementById("song-image").src = song.coverArt || "";
+    document.getElementById("song-card-title").textContent = song.title;
+    document.getElementById("song-card-author").textContent = "By: " + song.author;
+}
+
+function scrollCarousel(dir) {
+    currentCarouselIndex = (currentCarouselIndex + dir + songs.length) % songs.length;
+    renderCarousel();
+}
+
+// DOMContentLoaded 里：
+document.addEventListener("DOMContentLoaded", () => {
+    renderGlobalLeaderboard();
+    renderCarousel();
+    showView("global");
+});
+
+function showView(view) {
+    document.getElementById("universal-lb-view").style.display = view === "global" ? "" : "none";
+    document.getElementById("songView").style.display = view === "song" ? "" : "none";
+
+    document.getElementById("btn-global").classList.toggle("active", view === "global");
+    document.getElementById("btn-song").classList.toggle("active", view === "song");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    renderGlobalLeaderboard();
+    renderCarousel();       
+    showView("global");
 });
