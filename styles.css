@@ -11,7 +11,8 @@
 
 body {
     font-family: 'FOT-NewRodin Pro DB', 'Helvetica Neue', Arial, sans-serif;
-    background-image: linear-gradient(rgba(18, 83, 108, 0.45), rgba(20, 145, 143, 0.3)), url('images/miku-bg1.jpg');
+    /* background-image: linear-gradient(rgba(18, 83, 108, 0.45), rgba(20, 145, 143, 0.3)), url('images/miku-bg1.jpg'); */
+    background-image: url('images/miku-bg1.jpg');
     background-size: cover;
     background-position: center;
     color: #083647;
@@ -143,6 +144,43 @@ body {
 }
 
 /*********************** leaderboard page ***********************/
+#leader-navbar{
+    width: 100%;
+    background-color: #84abff;
+    color: #eef4f6;
+    padding-left: 10pt;
+    padding-right: 10pt;
+    padding-inline: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#leader-navbar h1 {
+  margin: 3pt;
+  white-space: nowrap;
+}
+
+#leader-navbar ul{
+    gap: clamp(20px, 5vw, 80px);
+    display: flex;
+    align-items: center;
+    list-style: none;
+    justify-content: space-between;
+}
+
+#leader-navbar a, #Logout{
+    color: #eef4f6; 
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#leader-cat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 
 /* Game page: central song card and arrows */
 #gameContainer {
@@ -258,3 +296,51 @@ body {
 }
 
 .arrow:hover { transform: translateY(-2px); }
+
+/* Select button */
+.select-wrap {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1.25rem;
+}
+.select-btn {
+        background: linear-gradient(135deg,#3cb9c8 0%,#5fcedd 100%);
+        border: none;
+        color: #fff;
+        padding: 0.6rem 1.1rem;
+        border-radius: 10px;
+        font-weight: 800;
+        cursor: pointer;
+}
+
+/* Modal styles */
+.modal.hidden { display: none; }
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+}
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(3,20,26,0.45);
+}
+.modal-dialog {
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    background: white;
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    min-width: 260px;
+    text-align: center;
+}
+.modal-actions { display: flex; gap: 0.6rem; justify-content: center; margin-top: 0.8rem; }
+.modal .btn { padding: 0.45rem 0.9rem; border-radius: 8px; border: none; cursor: pointer; }
+.modal .confirm-yes { background: #2c9a7a; color: white; font-weight: 700; }
+.modal .confirm-no { background: #e6eef0; color: #083647; font-weight: 700; }
+
+.sidebar-item { cursor: pointer; }
+.sidebar-item:hover { transform: translateX(4px); }

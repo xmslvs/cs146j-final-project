@@ -16,6 +16,7 @@ const songs = [
 ];
 
 let currentSongIndex = 0;
+let pendingIndex = null;
 
 function updateSongCard() {
   const titleEl = document.getElementById("song-card-title");
@@ -41,8 +42,8 @@ function renderSidebarList() {
   if (!listRoot) return;
   listRoot.innerHTML = songs
     .map(
-      (song) =>
-        `<div class="sidebar-item"><img src="${song.image}" alt="${song.title}" /><span>${song.title}</span></div>`,
+      (song, idx) =>
+        `<div class="sidebar-item" data-index="${idx}"><img src="${song.image}" alt="${song.title}" /><span>${song.title}</span></div>`,
     )
     .join("");
 }
@@ -61,6 +62,14 @@ runWhenReady(() => {
   const next = document.getElementById("nextBtn");
   const songCard = document.getElementById("song-card");
   const sidebar = document.getElementById("song-sidebar");
+  const selectBtn = document.getElementById("selectBtn");
+  const modal = document.getElementById("confirm-modal");
+  const modalOverlay = document.getElementById("modal-overlay");
+  const modalMessage = document.getElementById("modal-message");
+  const yesBtn = document.getElementById("confirm-yes");
+  const noBtn = document.getElementById("confirm-no");
+  const songListRoot = document.getElementById("song-list");
+  let pendingIndex = null;
 
   if (prev)
     prev.addEventListener("click", () => {
@@ -77,8 +86,60 @@ runWhenReady(() => {
       sidebar.classList.toggle("open");
     });
 
+  // select button opens confirm modal for current song
+  if (selectBtn) {
+    selectBtn.addEventListener("click", () => {
+      showConfirm(currentSongIndex);
+    });
+  }
+
+  // sidebar item clicks: set current index, update card, and show confirm
+  if (songListRoot) {
+    songListRoot.addEventListener("click", (e) => {
+      const item = e.target.closest(".sidebar-item");
+      if (!item) return;
+      const idx = parseInt(item.getAttribute("data-index"), 10);
+      if (Number.isFinite(idx)) {
+        currentSongIndex = idx;
+        updateSongCard();
+        showConfirm(idx);
+      }
+    });
+  }
+
   updateSongCard();
   renderSidebarList();
+});
+
+function showConfirm(idx) {
+  const modal = document.getElementById("confirm-modal");
+  const modalMessage = document.getElementById("modal-message");
+  if (!modal || !modalMessage) return;
+  pendingIndex = idx;
+  const title = (songs[idx] && songs[idx].title) || "this song";
+  modalMessage.textContent = `Begin game with "${title}"?`;
+  modal.classList.remove("hidden");
+  modal.classList.add("open");
+}
+
+function closeModal() {
+  const modal = document.getElementById("confirm-modal");
+  if (!modal) return;
+  modal.classList.add("hidden");
+  modal.classList.remove("open");
+}
+
+// wire modal yes/no buttons (delegated outside runWhenReady in case funcs exist)
+document.addEventListener("click", (e) => {
+  const yes = e.target.closest("#confirm-yes");
+  const no = e.target.closest("#confirm-no");
+  const overlay = e.target.closest("#modal-overlay");
+  if (yes) {
+    // user confirmed: clear the main area for now
+    yesBtn.disabled = true;
+  } else if (no || overlay) {
+    closeModal();
+  }
 });
 
 // show current word in "#text" container
