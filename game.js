@@ -135,8 +135,13 @@ document.addEventListener("click", (e) => {
   const no = e.target.closest("#confirm-no");
   const overlay = e.target.closest("#modal-overlay");
   if (yes) {
-    // user confirmed: clear the main area for now
-    yesBtn.disabled = true;
+    const gameContainer = document.getElementById("gameContainer");
+    const selectWrap = document.querySelector(".select-wrap");
+    const gamePlayer = document.getElementById("game-player");
+    if (gameContainer) gameContainer.classList.add("hidden");
+    if (selectWrap) selectWrap.classList.add("hidden");
+    if (gamePlayer) gamePlayer.classList.remove("hidden");
+    closeModal();
   } else if (no || overlay) {
     closeModal();
   }

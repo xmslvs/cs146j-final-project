@@ -6,6 +6,52 @@
   font-display: swap;
 }
 
+/*********************** universal nav bar ***********************/
+:root { --nav-height: 64px; }
+nav{
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #84abff;
+    color: #eef4f6;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: var(--nav-height);
+    z-index: 1000;
+}
+
+.navbar h1 {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  font-size: 1.1rem;
+}
+
+.navbar ul{
+    gap: clamp(12px, 4vw, 40px);
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.navbar a, #Logout{
+    color: #eef4f6; 
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.45rem 0.8rem;
+    border-radius: 8px;
+}
+.navbar a:hover, #Logout:hover { background: rgba(255,255,255,0.08); }
+
+/* ensure page content isn't hidden under fixed nav */
+main { padding-top: calc(var(--nav-height) + 0.75rem); }
+
 
 /*********************** login page ***********************/
 
@@ -144,36 +190,7 @@ body {
 }
 
 /*********************** leaderboard page ***********************/
-#leader-navbar{
-    width: 100%;
-    background-color: #84abff;
-    color: #eef4f6;
-    padding-left: 10pt;
-    padding-right: 10pt;
-    padding-inline: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 
-#leader-navbar h1 {
-  margin: 3pt;
-  white-space: nowrap;
-}
-
-#leader-navbar ul{
-    gap: clamp(20px, 5vw, 80px);
-    display: flex;
-    align-items: center;
-    list-style: none;
-    justify-content: space-between;
-}
-
-#leader-navbar a, #Logout{
-    color: #eef4f6; 
-    text-decoration: none;
-    cursor: pointer;
-}
 
 #leader-cat {
     display: flex;
@@ -182,7 +199,7 @@ body {
 }
 
 
-/* Game page: central song card and arrows */
+/*********************** Game page: central song card and arrows ***********************/
 #gameContainer {
     display: flex;
     align-items: center;
@@ -297,6 +314,20 @@ body {
 
 .arrow:hover { transform: translateY(-2px); }
 
+#game-player {
+    width: 100vw;
+    /* Container for the 5 lines */
+    padding: 20px 0;
+  }
+
+  #game-player hr {
+    border: 0;
+    border-top: 1px solid #000; /* Line thickness and color */
+    margin: 0;
+    /* Space between lines */
+    margin-bottom: 4rem; 
+  }
+
 /* Select button */
 .select-wrap {
         display: flex;
@@ -314,7 +345,11 @@ body {
 }
 
 /* Modal styles */
+#gameContainer.hidden { display: none; }
+.select-wrap.hidden { display: none; }
+.select-wrap.hidden button { pointer-events: none; }
 .modal.hidden { display: none; }
+#game-player.hidden { display: none; }
 .modal {
     position: fixed;
     inset: 0;

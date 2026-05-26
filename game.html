@@ -11,22 +11,21 @@
     <script src="https://unpkg.com/textalive-app-api/dist/index.js"></script>
     <!-- 3. Your custom code (NO type="module" here) -->
   </head>
+  <nav class="navbar">
+    <h1>SynchSonare</h1>
+    <ul class="nav-list">
+      <li>
+        <a href="/game.html">Game</a>
+      </li>
+      <li>
+        <a href="/gacha.html">Gacha</a>
+      </li>
+      <li>
+        <div id="Logout">Exit</div>
+      </li>
+    </ul>
+  </nav>
   <body>
-    <nav>
-      <h1>SynchSonare</h1>
-      <ul>
-        <li>
-          <a href="/leaderboard.html">Leaderboard</a>
-        </li>
-        <li>
-          <a href="/gacha.html">Gacha</a>
-        </li>
-        <li>
-          <a href="/index.html">Home</a>
-          <!-- <div id="Logout">Logout</div> -->
-        </li>
-      </ul>
-    </nav>
     <main>
       <aside id="song-sidebar" class="song-sidebar">
         <div class="sidebar-header">
@@ -35,7 +34,7 @@
         </div>
         <div id="song-list" class="song-list"></div>
       </aside>
-      <section id="gameContainer">
+      <section id="gameContainer" class="">
         <button id="prevBtn" class="arrow">&#9664;</button>
         <div id="song-card">
           <img
@@ -63,6 +62,14 @@
           </div>
         </div>
       </div>
+
+      <div id="game-player" class="hidden">
+        <hr />
+        <hr />
+        <hr />
+        <hr />
+      </div>
+
       <script src="game.js"></script>
       <script src="logout.js"></script>
     </main>
