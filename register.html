@@ -5,29 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CS146J final project</title>
     <link rel="stylesheet" href="styles.css" />
-      <!-- 1. Load Axios (Required dependency) -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-    <!-- 2. Load TextAlive App API (Exposes a global variable named TextAliveApp) -->
-    <script src="https://unpkg.com/textalive-app-api/dist/index.js"></script>
-
-    <!-- 3. Your custom code (NO type="module" here) -->
     <script src="register.js"></script>
   </head>
+  
   <body>
-      <aside id = "left">
-        <img/> <!-- Login Splash Image-->
-      </aside>
-      <main>
-        <div id = "login">
-          <h2>Register:</h2>
-          <label title=".username">Username:</label>
-          <input type="text" id="username">
-          <label title=".password">Password:</label>
-          <input type="password" id="password">
-          <button type="submit">Submit</button>
-          <a href="/index.html">Registered? Login here</a>
-        </div>
-      </main>
+    <div class="home">
+      <div class="miku-chara">
+        <img alt="miku" src="/images/micmiku.png" />
+      </div>
+      <form id="login-form">
+        <label for="name">Username:</label>
+        <input type="text" id="name" name="user_name" />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="user_password" />
+        <button type="submit">Register</button>
+        <a class="create-acc" href="/index.html">Login:</a>
+      </form>
+    </div>
   </body>
 </html>

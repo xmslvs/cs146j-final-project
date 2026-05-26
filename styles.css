@@ -258,3 +258,64 @@ body {
 }
 
 .arrow:hover { transform: translateY(-2px); }
+
+/* gacha page */
+#nav
+#gachaMain {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#gachaContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 800px;
+    padding: 0em 3em;
+}
+#gachaConatiner h2 {
+    padding: 0;
+    margin: 0;
+}
+#gachaContainer #info {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#gachaContainer #pullBtns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1em;
+}
+#gachaContainer #pullBtns button {
+    padding: 1em;
+    border-radius: 2px;
+    border: 2px darkslategray solid;
+    background-color: #5fcedd;
+    color: white;
+}
+#gachaContainer #pullBtns button:hover {
+    background-color: #196c78;
+}
+nav {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 2em;
+    align-items: center;
+}
+nav ul li {
+    list-style-type: none;
+}
