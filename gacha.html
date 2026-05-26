@@ -8,24 +8,38 @@
     <script src="gacha.js"></script>
     <script src="logout.js"></script>
   </head>
-  <nav class="navbar">
-    <h1>SynchSonare</h1>
-    <ul class="nav-list">
-      <li>
-        <a href="/game.html">Game</a>
-      </li>
-      <li>
-        <a href="/gacha.html">Gacha</a>
-      </li>
-      <li>
-        <div id="Logout">Exit</div>
-      </li>
-    </ul>
-  </nav>
   <body>
-    <main>
-      <section id="gachaContainer">
-        <div id="text"></div>
+        <nav id="leader-navbar">
+      <h1>SynchSonare</h1>
+      <ul>
+        <li>
+          <a href="/game.html">Game</a>
+        </li>
+        <li>
+          <a href="/leaderboard.html">Leaderboard</a>
+        </li>
+        <li>
+          <div id="Logout">Exit</div>
+        </li>
+      </ul>
+    </nav>
+    <main id = "gachaMain">
+      <section id = "gachaContainer">
+        <div id = "info">
+          <h2>Roll for Accessories!</h2>
+          <div id = "currency">💎: 1490</div>
+        </div>
+        <img id = "splash" src="images/gachabanner.png"></img>
+        <div id = "pullBtns">
+          <div id = "onePullContainer">
+            <p>Pull x1</p>
+            <button id = "onePull">💎100</button>
+          </div>
+          <div id ="tenPullContainer">
+            <p>Pull x10</p>
+            <button id = "tenPull">💎1000</button>
+          </div>
+        </div>
       </section>
     </main>
   </body>
