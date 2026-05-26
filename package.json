@@ -1,0 +1,23 @@
+{
+  "name": "cs146j-final-project",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/xmslvs/cs146j-final-project#readme",
+  "bugs": {
+    "url": "https://github.com/xmslvs/cs146j-final-project/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xmslvs/cs146j-final-project.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "main-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "textalive-app-api": "^0.4.0"
+  }
+}
