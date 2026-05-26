@@ -1,0 +1,143 @@
+@font-face {
+  font-family: 'FOT-NewRodin Pro DB';
+  src: url('fonts/FOT-NewRodin Pro DB.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/*********************** login page ***********************/
+
+body {
+    font-family: 'FOT-NewRodin Pro DB', 'Helvetica Neue', Arial, sans-serif;
+    background-image: linear-gradient(rgba(18, 83, 108, 0.45), rgba(20, 145, 143, 0.3)), url('images/miku-bg1.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #083647;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.miku-chara img {
+    max-height: 50vh;
+    width: auto;
+    margin-right: 4rem;
+    border-radius: 1.5rem;
+    box-shadow: none;
+}
+
+.home {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+#login-form {
+    background-color: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(78, 177, 190, 0.35);
+    box-shadow: 0 24px 60px rgba(5, 65, 80, 0.18);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.2rem;
+    width: min(300px, 100%);
+    align-items: center;
+}
+
+#login-form label {
+    display: block;
+    width: 100%;
+    max-width: 220px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0d5362;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+}
+
+#login-form input,
+#login-form p.create-acc {
+    width: 100%;
+    max-width: 220px;
+    box-sizing: border-box;
+}
+
+#login-form button {
+    width: auto;
+    min-width: 160px;
+    max-width: 220px;
+    box-sizing: border-box;
+}
+
+#login-form input {
+    background-color: #eef4f6;
+    border: 1px solid rgba(94, 146, 159, 0.8);
+    border-radius: 0.5rem;
+    padding: 0.65rem 0.85rem;
+    color: #0f4c5c;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#login-form button {
+    background: linear-gradient(135deg, #3cb9c8 0%, #5fcedd 100%);
+    border: none;
+    border-radius: 0.75rem;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 800;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#login-form input:focus {
+    border-color: #4bc2d8;
+    box-shadow: 0 0 0 6px rgba(75, 194, 216, 0.16);
+}
+
+#login-form button:hover {
+    transform: translateY(-1px);
+}
+
+#create-account,
+#login-form .create-acc {
+    color: #196c78;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+#create-account a,
+#login-form .create-acc {
+    color: #196c78;
+}
+
+#login-form p.create-acc {
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    .home {
+        flex-wrap: wrap;
+    }
+
+    .miku-chara img {
+        margin-right: 0;
+        max-height: 40vh;
+    }
+
+    #login-form {
+        width: 100%;
+    }
+}
