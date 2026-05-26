@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS146J final project</title>
+    <link rel="stylesheet" href="styles.css" />
+      <!-- 1. Load Axios (Required dependency) -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- 2. Load TextAlive App API (Exposes a global variable named TextAliveApp) -->
+    <script src="https://unpkg.com/textalive-app-api/dist/index.js"></script>
+
+    <!-- 3. Your custom code (NO type="module" here) -->
+    <script src="main.js"></script>
+    <script src="logout.js"></script>
+  </head>
+  <body>
+    <nav>
+      <h1>SynchSonare</h1>
+      <ul>
+        <li>
+          <a href="/game.html">Game</a>
+        </li>
+        <li>
+          <a href="/gacha.html">Gacha</a>
+        </li>
+        <li>
+          <div id="Logout">Logout</div>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <section id = "leaderboardContainer">
+        <div id = "text"></div>
+      </section>
+    </main>
+  </body>
+</html>

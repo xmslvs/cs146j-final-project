@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CS146J final project</title>
     <link rel="stylesheet" href="styles.css" />
-    <script src="login.js"></script>
+      <!-- 1. Load Axios (Required dependency) -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- 2. Load TextAlive App API (Exposes a global variable named TextAliveApp) -->
+    <script src="https://unpkg.com/textalive-app-api/dist/index.js"></script>
+
+    <!-- 3. Your custom code (NO type="module" here) -->
+    <script src="register.js"></script>
   </head>
   <body>
       <aside id = "left">
@@ -13,13 +20,13 @@
       </aside>
       <main>
         <div id = "login">
-          <h2>Login:</h2>
+          <h2>Register:</h2>
           <label title=".username">Username:</label>
           <input type="text" id="username">
           <label title=".password">Password:</label>
           <input type="password" id="password">
           <button type="submit">Submit</button>
-          <a href="/register.html">Register Here</a>
+          <a href="/index.html">Registered? Login here</a>
         </div>
       </main>
   </body>
