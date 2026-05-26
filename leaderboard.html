@@ -12,8 +12,8 @@
     <script src="https://unpkg.com/textalive-app-api/dist/index.js"></script>
 
     <!-- 3. Your custom code (NO type="module" here) -->
-    <script src="stats.js"></script>
-    <script src="logout.js"></script>
+    <script src="stats.js" defer></script>
+    <!-- <script src="logout.js"></script> -->
   </head>
   <body>
     <nav id="leader-navbar">
@@ -33,11 +33,6 @@
     <main>
       <section id="leaderboardContainer">
         <h1 id="leaderbaord-header">Leaderboard</h1>
-        <div id="leader-cat">
-          <h3 id="user_">User</h3>
-          <button>Song</button>
-        </div>
-        <div id="text"></div>
       </section>
     </main>
   </body>

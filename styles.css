@@ -345,6 +345,7 @@ body {
 .sidebar-item { cursor: pointer; }
 .sidebar-item:hover { transform: translateX(4px); }
 
+/* gacha */
 #gachaContainer {
     display: flex;
     flex-direction: column;
@@ -370,4 +371,8 @@ body {
 }
 #gachaContainer button:hover {
     background-color: #2c9a7a;
+}
+/* leaderboard dynamic elems */
+.song-info-layout img {
+    height: 200px;
 }
