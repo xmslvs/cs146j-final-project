@@ -4,13 +4,15 @@ async function login(username, password) {
         method: "POST",
         headers:{
             "Username": username,
-            "Password": password
+            "Password": password //TODO: use SupaBase Auth instead
         }});
     data = await response.json();
-    // TODO: response should be json object with "validated" bool and "userKey" string. Set up in main-server.js.
+    // TODO: response should be json object with "userKey" string. Set up in main-server.js.
     try {
-        if (data.validated) {
+        if (response.status.ok) {
             localStorage.setItem(UserKey, data.userKey);
+            localStorage.setItem(currency, data.heldCurrency);
+            localStorage.setItem(accessories, data.accessories);
             // TODO: redirect to game.html
         } else {
             alert("Login failed. Please try again.");
@@ -28,9 +30,9 @@ async function register(username, password) {
             "Password": password
         }});
     data= await response.json();
-    // TODO: response should be json object with "validRegistration" bool and "userkey" string. Set up in main-server.js.
+    // TODO: response should be json object with "userkey" string. Set up in main-server.js.
     try {
-        if (data.validRegistration) {
+        if (response.status.ok) {
             localStorage.setItem(userKey, data.userKey);
             // TODO: redirect to game.html
         } else {
