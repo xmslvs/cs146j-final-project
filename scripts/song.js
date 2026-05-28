@@ -1,74 +1,76 @@
 const { Player } = TextAliveApp;
-key = "MMp6OLkimxy48EGl"; // issa's API key for TextAlive API
+
+const mediaElement = document.querySelector("#media");
+if (!mediaElement) {
+  console.error(
+    "TextAlive player failed to initialize: #media element not found.",
+  );
+}
 
 const player = new Player({
-  app: { token: key },
-  mediaElement: document.querySelector("#media"),
+  app: {
+    token: "MMp6OLkimxy48EGl", // Put your actual developer token here
+  },
+  mediaElement,
 });
 
-console.log("Player initialized:", player);
+const song = {
+  phrases: [],
+};
 
-// player.addListener({
-//   onAppReady(app) {
-//     player.createFromSongUrl("https://piapro.jp/t/ULcJ/20250205120202");
-//   },
-//   onVideoReady(video) {
-//     console.log("Video is ready:", video);
-//   },
-// });
-
-// player.addListener({
-//   onAppReady(app) {
-//     console.log("App ready. Loading song with lyrics...");
-
-//     // We provide BOTH the song video URL and the specific TextAlive lyric data URL
-//     player.createFromSongUrl(
-//       "[https://piapro.jp/t/Nsek/20210204123145](https://piapro.jp/t/Nsek/20210204123145)",
-//     );
-//   },
-
-//   onVideoReady(video) {
-//     console.log("--- Video Data Loaded ---");
-//     // Do not just log the whole object; explicitly check the properties
-//     console.log(
-//       "Total Phrases found:",
-//       video.phrases ? video.phrases.length : 0,
-//     );
-
-//     if (video.phrases && video.phrases.length > 0) {
-//       console.log("Sample Lyric Text:", video.phrases[0].text);
-//     }
-//   },
-// });
+song.ready = new Promise((resolve) => {
+  song._resolveReady = resolve;
+});
 
 player.addListener({
+  // 1. TextAlive server is ready
   onAppReady(app) {
-    console.log("App ready. Loading official master track...");
-
-    // Using an official AIST TextAlive asset ID package
-    player.createFromSongUrl("https://www.youtube.com/watch?v=ygY2qObZv24", {
-      video: {
-        // This specific ID points to the official "King" by Kanaria lyric map
-        lyricId: 52085,
-        lyricUrl: "https://piapro.jp/t/IpWw/20210203231713",
-      },
-    });
+    // Force the app to load our target song safely
+    if (!app.managed) {
+      player
+        .createFromSongUrl("https://www.youtube.com/watch?v=ygY2qObZv24")
+        .then(() => {
+          if (typeof player.requestPlay === "function") {
+            player.requestPlay().catch((error) => {
+              console.warn("TextAlive playback blocked or failed:", error);
+            });
+          }
+        })
+        .catch((error) => {
+          console.error("Failed to load TextAlive song URL:", error);
+        });
+    }
   },
 
+  // fires when the video and all text loops are ready.
   onVideoReady(video) {
-    console.log("--- Video Ready Triggered ---");
+    // Safely extract the phrases from the player's video asset
+    const phrases = player.video.phrases || [];
+    // console.log("--- DATA READY ---");
+    // console.log("Phrases count:", phrases.length);
+    // console.log("Full Phrases List:", phrases);
 
-    // Check the raw lyric text array directly
-    if (video.lyrics) {
-      console.log("Raw text data exists:", video.lyrics.text);
+    // console.log(player);
+
+    phrases.forEach((phrase, index) => {
+      const startTime = phrase.startTime;
+      song.phrases.push({
+        text: phrase.text,
+        startTime: startTime,
+      });
+      setTimeout(() => {
+        console.log(`Phrase ${index + 1}: at ${startTime}ms`); // Log each phrase's text and timing
+      }, startTime);
+    });
+    if (song._resolveReady) {
+      song._resolveReady();
     }
+  },
 
-    // Force a data refresh check
-    const phrases = video.phrases || [];
-    console.log("Phrases count:", phrases.length);
-
-    if (phrases.length > 0) {
-      console.log("Success! First line:", phrases[0].text);
-    }
+  // 3. This runs automatically every millisecond during music playback
+  onTimeUpdate(position) {
+    const currentPhrase = player.findPhrase(position);
   },
 });
+
+export default { song, player };

@@ -10,7 +10,7 @@
     <!-- 2. Load TextAlive App API (Exposes a global variable named TextAliveApp) -->
     <script src="https://unpkg.com/textalive-app-api/dist/index.js"></script>
     <!-- 3. Your custom code (NO type="module" here) -->
-     <script src="logout.js" defer></script>
+    <script src="scripts/logout.js" defer></script>
   </head>
   <nav class="navbar">
     <h1>SynchSonare</h1>
@@ -71,8 +71,10 @@
         <hr />
       </div>
 
-      <script src="game.js"></script>
-      <script src="logout.js"></script>
+      <div id="media"></div>
+      <script src="scripts/game-page.js"></script>
+      <script src="scripts/logout.js"></script>
+      <script type="module" src="scripts/game.js"></script>
     </main>
   </body>
 </html>
