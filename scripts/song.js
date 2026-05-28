@@ -1,3 +1,8 @@
+/**
+ * This file initializes the TextAlive Player, loads the song data, and extracts the phrases with their timings.
+ * The player and song object are exported for use in the main game logic (game.js).
+ */
+
 const { Player } = TextAliveApp;
 
 const mediaElement = document.querySelector("#media");

@@ -6,7 +6,7 @@ const songs = [
   {
     title: "World is Mine",
     image: "images/Hatsune_miku_v6.webp",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    url: "https://www.youtube.com/watch?v=jhl5afLEKdo",
   },
   {
     title: "Sample Song 2",
@@ -141,6 +141,7 @@ document.addEventListener("click", (e) => {
     if (gameContainer) gameContainer.classList.add("hidden");
     if (selectWrap) selectWrap.classList.add("hidden");
     if (gamePlayer) gamePlayer.classList.remove("hidden");
+    document.getElementById("song-sidebar").classList.remove("open");
     closeModal();
   } else if (no || overlay) {
     closeModal();
